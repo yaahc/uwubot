@@ -1,17 +1,7 @@
-use uwuifier::uwuify_sse;
+use uwuifier::uwuify_str_sse;
 
 pub fn uwuify(input: &str) -> String {
-    // should be small enough so stuff fits in L1/L2 cache
-    // but big enough so each thread has enough work to do
-    const LEN: usize = 1 << 16;
-
-    let bytes = input.as_bytes();
-    let mut temp_bytes1 = vec![0u8; LEN * 16];
-    let mut temp_bytes2 = vec![0u8; LEN * 16];
-
-    let res = uwuify_sse(bytes, &mut temp_bytes1, &mut temp_bytes2);
-
-    String::from_utf8_lossy(res).to_string()
+    uwuify_str_sse(input)
 }
 
 #[cfg(test)]
