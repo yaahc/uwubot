@@ -11,28 +11,9 @@ use serenity::{
 
 pub struct Handler;
 
-#[async_trait]
-impl EventHandler for Handler {
-    async fn ready(&self, _: Context, ready: Ready) {
-        println!("{} is connected!", ready.user.name);
-    }
-
-    async fn interaction_create(&self, ctx: Context, interaction: Interaction) {
-        let data = if let Some(data) = &interaction.data {
-            data
-        } else {
-            return;
-        };
-
-        match data.name.as_str() {
-            "uwuify" => {}
-            _ => {
-                println!("unknown interaction");
-                dbg!(&interaction);
-                return;
-            }
-        }
-
+impl Handler {
+    async fn handle_uwuify(&self, ctx: Context, interaction: Interaction) {
+        let data = interaction.data.as_ref().unwrap();
         let option = &data.options[0];
 
         assert_eq!("text", option.name);
@@ -56,5 +37,24 @@ impl EventHandler for Handler {
             })
             .await
             .unwrap_or_report();
+    }
+}
+
+#[async_trait]
+impl EventHandler for Handler {
+    async fn ready(&self, _: Context, ready: Ready) {
+        println!("{} is connected!", ready.user.name);
+    }
+
+    async fn interaction_create(&self, ctx: Context, interaction: Interaction) {
+        if let Some(data) = &interaction.data {
+            match data.name.as_str() {
+                "uwuify" => self.handle_uwuify(ctx, interaction).await,
+                _ => {
+                    println!("unknown interaction");
+                    dbg!(&interaction);
+                }
+            }
+        }
     }
 }
