@@ -2,14 +2,14 @@ use structopt::StructOpt;
 
 #[derive(Debug, StructOpt)]
 pub struct Args {
-    /// Discord API key
-    pub api_key: String,
+    /// Discord Bot's Client API key
+    pub client_secret: String,
 
     /// Discord guild ID to register slash commands for
     #[structopt(short, long)]
     pub guild_id: Option<u64>,
 
-    /// Discord Bot Client ID associated with this bot
+    /// Discord Bot Client ID to register slash commands for
     #[structopt(short, long)]
     pub client_id: u64,
 }

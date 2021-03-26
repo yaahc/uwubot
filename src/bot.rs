@@ -41,7 +41,7 @@ impl Bot {
     }
 
     fn token(&self) -> &str {
-        &self.args.api_key
+        &self.args.client_secret
     }
 
     fn handler(&self) -> event_handler::Handler {
