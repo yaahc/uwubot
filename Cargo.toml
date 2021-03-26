@@ -3,6 +3,11 @@ name = "uwubot"
 version = "0.1.0"
 authors = ["Jane Lusby <jlusby@yaah.dev>"]
 edition = "2018"
+license = "MIT OR Apache-2.0"
+description = "discord bot for uwuifying text"
+repository = "https://github.com/yaahc/uwubot"
+documentation = "https://docs.rs/uwubot"
+readme = "README.md"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
