@@ -25,7 +25,10 @@ impl Bot {
     #[tokio::main]
     pub async fn run(&self) -> eyre::Result<()> {
         if let Some(guild_id) = self.args.guild_id {
-            self.register_slash_commands(GuildId(guild_id)).await?;
+            self.register_slash_commands_guild(GuildId(guild_id))
+                .await?;
+        } else {
+            self.register_slash_commands_global().await?;
         }
 
         let mut client = Client::builder(self.token())
@@ -50,12 +53,25 @@ impl Bot {
     }
 
     // Commands registered here are handled in the `event_handlers` module
-    async fn register_slash_commands(&self, guild_id: GuildId) -> eyre::Result<()> {
+    async fn register_slash_commands_guild(&self, guild_id: GuildId) -> eyre::Result<()> {
         let http = Http::new_with_token(self.token());
 
         Interaction::create_guild_application_command(
             http,
             guild_id,
+            self.application_id(),
+            Self::uwuify_command,
+        )
+        .await?;
+
+        Ok(())
+    }
+
+    async fn register_slash_commands_global(&self) -> eyre::Result<()> {
+        let http = Http::new_with_token(self.token());
+
+        Interaction::create_global_application_command(
+            http,
             self.application_id(),
             Self::uwuify_command,
         )
