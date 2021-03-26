@@ -17,8 +17,6 @@ pub struct Bot {
 }
 
 impl Bot {
-    const APPLICATION_ID: u64 = 824691677372612680;
-
     pub fn new() -> Self {
         let args = Args::from_args();
         Self { args }
@@ -47,13 +45,18 @@ impl Bot {
         event_handler::Handler
     }
 
+    fn application_id(&self) -> u64 {
+        self.args.client_id
+    }
+
+    // Commands registered here are handled in the `event_handlers` module
     async fn register_slash_commands(&self, guild_id: GuildId) -> eyre::Result<()> {
         let http = Http::new_with_token(self.token());
 
         Interaction::create_guild_application_command(
             http,
             guild_id,
-            Self::APPLICATION_ID,
+            self.application_id(),
             Self::uwuify_command,
         )
         .await?;
