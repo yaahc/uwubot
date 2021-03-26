@@ -1,5 +1,5 @@
-use color_eyre::eyre;
-use eyre::eyre;
+use crate::uwu::uwuify;
+use crate::ResultExt;
 use serenity::{
     async_trait,
     model::{
@@ -8,8 +8,6 @@ use serenity::{
     },
     prelude::*,
 };
-
-use crate::uwu::uwuify;
 
 pub struct Handler;
 
@@ -27,32 +25,36 @@ impl EventHandler for Handler {
         };
 
         match data.name.as_str() {
-            "uwuify" => {
-                let option = &data.options[0];
-                assert_eq!("text", option.name);
-                let value = option
-                    .value
-                    .as_ref()
-                    .expect("text is a required argument")
-                    .as_str()
-                    .expect("text is always a String type");
-
-                let uwud = uwuify(value);
-
-                let http = &ctx.http;
-                if let Err(e) = interaction
-                    .create_interaction_response(http, |response| {
-                        response
-                            .kind(InteractionResponseType::ChannelMessageWithSource)
-                            .interaction_response_data(|data| data.content(uwud))
-                    })
-                    .await
-                {
-                    let e = eyre!(e);
-                    eprintln!("Error: {:?}", e)
-                }
+            "uwuify" => {}
+            _ => {
+                println!("unknown interaction");
+                dbg!(&interaction);
+                return;
             }
-            _ => println!("unknown interaction"),
         }
+
+        let option = &data.options[0];
+
+        assert_eq!("text", option.name);
+
+        let value = option
+            .value
+            .as_ref()
+            .expect("text is a required argument")
+            .as_str()
+            .expect("text is always a String type");
+
+        let uwud = uwuify(value);
+
+        let http = &ctx.http;
+
+        interaction
+            .create_interaction_response(http, |response| {
+                response
+                    .kind(InteractionResponseType::ChannelMessageWithSource)
+                    .interaction_response_data(|data| data.content(uwud))
+            })
+            .await
+            .unwrap_or_report();
     }
 }
