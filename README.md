@@ -10,13 +10,21 @@ uwubot
 
 This crate defines a discord bot using [`serenity`] for uwuifying text via [`uwuify`].
 
-## Setup
+## Installation
+
+You can install uwubot from source or from `crates.io`
+
+```
+cargo install uwubot
+```
+
+## Usage / Bot Setup
 
 You can setup your own instance of uwubot using the following steps:
 
 1. create a new bot in the [discord developer portal]
 1. copy the client-id and client-secrets from the new bot
-1. run uwubot with `cargo run -- <client-secret> --client-id <client-id>`
+1. run uwubot with `uwubot <client-secret> --client-id <client-id>`
 1. create a url with the `applications.commands` oauth2 scope on the `OAuth2` tab of the developer portal
 1. navigate to the generated URL to register your bot on your server of choice
 
