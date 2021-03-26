@@ -11,11 +11,12 @@ pub fn uwuify(input: &str) -> String {
 
     let bytes = input.as_bytes();
     let bytes_buf_len = round_up(bytes.len(), 16);
-    let bytes_buf = vec![0u8; bytes_buf_len];
+    let mut bytes_buf = vec![0u8; bytes_buf_len];
+    bytes_buf[0..bytes.len()].copy_from_slice(bytes);
     let mut temp_bytes1 = vec![0u8; LEN * 16];
     let mut temp_bytes2 = vec![0u8; LEN * 16];
 
-    let res = uwu_ify_sse(bytes, bytes.len(), &mut temp_bytes1, &mut temp_bytes2);
+    let res = uwu_ify_sse(&bytes_buf, bytes.len(), &mut temp_bytes1, &mut temp_bytes2);
 
     String::from_utf8_lossy(res).to_string()
 }
@@ -27,7 +28,8 @@ mod tests {
     #[test]
     fn uwufiy() {
         let input = "this is an extremely important bot and I expect it to have a major impact on human culture.";
-        let expected = "foo";
+        let expected = "this is an extwemewy i-impowtant bot a-and i expect it to have a majow i-impact on human cuwtuwe.";
+
         let output = uwuify(input);
 
         assert_eq!(expected, output);
