@@ -23,8 +23,8 @@ cargo install uwubot
 You can setup your own instance of uwubot using the following steps:
 
 1. create a new bot in the [discord developer portal]
-1. copy the client-id and client-secrets from the new bot
-1. run uwubot with `uwubot <client-secret> --client-id <client-id>`
+1. copy the client-id and bot token from the new bot
+1. run uwubot with `uwubot <bot-token> --client-id <client-id>`
 1. create a url with the `applications.commands` oauth2 scope on the `OAuth2` tab of the developer portal
 1. navigate to the generated URL to register your bot on your server of choice
 
