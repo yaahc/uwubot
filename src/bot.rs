@@ -1,4 +1,4 @@
-use crate::cli::Args;
+use crate::Config;
 use color_eyre::eyre;
 use serenity::{
     builder::CreateInteraction,
@@ -13,18 +13,21 @@ use serenity::{
 mod event_handler;
 
 pub struct Bot {
-    args: Args,
+    config: Config,
 }
 
 impl Bot {
-    pub fn new() -> Self {
-        let args = Args::from_args();
-        Self { args }
+    pub fn new<T>(config: T) -> Self
+    where
+        Config: From<T>,
+    {
+        let config = Config::from(config);
+        Self { config }
     }
 
     #[tokio::main]
     pub async fn run(&self) -> eyre::Result<()> {
-        if let Some(guild_id) = self.args.guild_id {
+        if let Some(guild_id) = self.config.guild_id {
             self.register_slash_commands_guild(GuildId(guild_id))
                 .await?;
         } else {
@@ -41,7 +44,7 @@ impl Bot {
     }
 
     fn token(&self) -> &str {
-        &self.args.client_secret
+        &self.config.bot_token
     }
 
     fn handler(&self) -> event_handler::Handler {
@@ -49,7 +52,7 @@ impl Bot {
     }
 
     fn application_id(&self) -> u64 {
-        self.args.client_id
+        self.config.client_id
     }
 
     // Commands registered here are handled in the `event_handlers` module
@@ -91,11 +94,5 @@ impl Bot {
                     .kind(ApplicationCommandOptionType::String)
                     .required(true)
             })
-    }
-}
-
-impl Default for Bot {
-    fn default() -> Self {
-        Self::new()
     }
 }

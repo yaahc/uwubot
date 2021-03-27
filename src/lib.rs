@@ -1,8 +1,9 @@
 mod bot;
-mod cli;
+mod config;
 mod uwu;
 
 pub use bot::Bot;
+pub use config::Config;
 
 trait ResultExt {
     fn unwrap_or_report(self);
