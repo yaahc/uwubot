@@ -7,6 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 <!-- next-header -->
 
 ## [Unreleased] - ReleaseDate
+# Added
+- Add new methods to `Bot` for listing and deleting guild slash commands
+- Exposed methods via new subcommands in main.rs
+
+# Changed
+- Removed implicit command registration from `Bot::run`
+- Changed `Bot::run` to be an async function
+- Removed `guild_id` from `Config` struct
 
 ## [0.2.2] - 2021-03-27
 # Added
