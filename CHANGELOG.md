@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 <!-- next-header -->
 
 ## [Unreleased] - ReleaseDate
+
+## [0.2.2] - 2021-03-27
 # Added
 - Added example for how to run with docker
 
@@ -20,6 +22,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Moved structopt argument parser into main.rs and export new `Config` replacement
 
 <!-- next-url -->
-[Unreleased]: https://github.com/yaahc/uwubot/compare/v0.2.1...HEAD
+[Unreleased]: https://github.com/yaahc/uwubot/compare/v0.2.2...HEAD
+[0.2.2]: https://github.com/yaahc/uwubot/compare/v0.2.1...v0.2.2
 [0.2.1]: https://github.com/yaahc/uwubot/compare/v0.2.0...v0.2.1
 [0.2.0]: https://github.com/yaahc/uwubot/releases/tag/v0.2.0

@@ -1,5 +1,5 @@
 //! Uwuifying discord bot for conveniently uwuifying text with friends
-#![doc(html_root_url = "https://docs.rs/uwubot/0.2.1")]
+#![doc(html_root_url = "https://docs.rs/uwubot/0.2.2")]
 #![cfg_attr(docsrs, feature(doc_cfg))]
 #![warn(
     rust_2018_idioms,
