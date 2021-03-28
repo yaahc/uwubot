@@ -28,9 +28,9 @@ You can setup your own instance of uwubot using the following steps:
 1. create a url with the `applications.commands` oauth2 scope on the `OAuth2` tab of the developer portal
 1. navigate to the generated URL to register your bot on your server of choice
 
-If you'd like to use the instance of uwubot that I'm running you can use this url to register it on your server. **Note: I don't make any sort of uptime guarantees for this instance, as of writing this README I'm running it on my laptop, so it will almost certainly be offline, though eventually I hope to run it on my desktop...**
+### Docker Instance
 
-- https://discord.com/api/oauth2/authorize?client_id=824691677372612680&scope=applications.commands
+Alternatively you can try to run `uwubot` with the provided `Dockerfile`. The `bot-token` and `client-id` args can be set via the `BOT_TOKEN` or `CLIENT_ID` environment variables.
 
 ## Additional Details
 
