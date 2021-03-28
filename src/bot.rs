@@ -28,21 +28,8 @@ impl Bot {
         Self { config }
     }
 
-    #[tokio::main]
     /// Run uwubot.
-    ///
-    /// ## Details
-    ///
-    /// This command will register slash commands for uwubot, either globally or
-    /// for a specific guild if a guild_id was set in the `Config`.
     pub async fn run(&self) -> eyre::Result<()> {
-        if let Some(guild_id) = self.config.guild_id {
-            self.register_slash_commands_guild(GuildId(guild_id))
-                .await?;
-        } else {
-            self.register_slash_commands_global().await?;
-        }
-
         let mut client = Client::builder(self.token())
             .event_handler(self.handler())
             .await?;
@@ -65,7 +52,9 @@ impl Bot {
     }
 
     // Commands registered here are handled in the `event_handlers` module
-    async fn register_slash_commands_guild(&self, guild_id: GuildId) -> eyre::Result<()> {
+
+    /// Register a slash command for a given Guild.
+    pub async fn register_slash_commands_guild(&self, guild_id: GuildId) -> eyre::Result<()> {
         let http = Http::new_with_token(self.token());
 
         Interaction::create_guild_application_command(
@@ -79,7 +68,42 @@ impl Bot {
         Ok(())
     }
 
-    async fn register_slash_commands_global(&self) -> eyre::Result<()> {
+    /// List all slash commands for a given Guild.
+    pub async fn list_slash_commands_guild(&self, guild_id: GuildId) -> eyre::Result<()> {
+        let http = Http::new_with_token(self.token());
+
+        let guild_cmds = http
+            .get_guild_application_commands(self.application_id(), guild_id.0)
+            .await?;
+
+        dbg!(guild_cmds);
+
+        Ok(())
+    }
+
+    /// Delete a slash command for a given Guild.
+    pub async fn delete_slash_commands_guild(
+        &self,
+        guild_id: GuildId,
+        command_id: u64,
+    ) -> eyre::Result<()> {
+        let http = Http::new_with_token(self.token());
+
+        http.delete_guild_application_command(self.application_id(), guild_id.0, command_id)
+            .await?;
+
+        println!("{}", crate::uwu::uwuify("command deleted ^_^"));
+
+        Ok(())
+    }
+
+    /// Register a slash command globally for all guilds.
+    ///
+    /// # Details
+    ///
+    /// Global commands are cached with a 1 hour update interval, it is
+    /// recommended that you use `register_slash_commands_guild` when testing.
+    pub async fn register_slash_commands_global(&self) -> eyre::Result<()> {
         let http = Http::new_with_token(self.token());
 
         Interaction::create_global_application_command(
