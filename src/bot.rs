@@ -12,11 +12,14 @@ use serenity::{
 
 mod event_handler;
 
+/// The bot, the myth, the legend, uwubot
 pub struct Bot {
     config: Config,
 }
 
 impl Bot {
+    /// Construct an uwubot given a config type that can be converted into
+    /// `uwubot::Config`.
     pub fn new<T>(config: T) -> Self
     where
         Config: From<T>,
@@ -26,6 +29,12 @@ impl Bot {
     }
 
     #[tokio::main]
+    /// Run uwubot.
+    ///
+    /// ## Details
+    ///
+    /// This command will register slash commands for uwubot, either globally or
+    /// for a specific guild if a guild_id was set in the `Config`.
     pub async fn run(&self) -> eyre::Result<()> {
         if let Some(guild_id) = self.config.guild_id {
             self.register_slash_commands_guild(GuildId(guild_id))

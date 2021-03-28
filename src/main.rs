@@ -5,14 +5,15 @@ use uwubot::{Bot, Config};
 #[derive(Debug, StructOpt)]
 struct Args {
     /// Discord Bot's token
+    #[structopt(env)]
     bot_token: String,
 
     /// Discord Bot Client ID to register slash commands for
-    #[structopt(short, long)]
+    #[structopt(short, long, env)]
     client_id: u64,
 
     /// Discord guild ID to register slash commands for
-    #[structopt(short, long)]
+    #[structopt(short, long, env)]
     guild_id: Option<u64>,
 }
 
