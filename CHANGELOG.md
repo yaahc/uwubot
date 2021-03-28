@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 <!-- next-header -->
 
 ## [Unreleased] - ReleaseDate
+
+## [0.2.1] - 2021-03-27
 # Added
 - Add a Dockerfile for deploying uwubot
 - Add an environment variable fallback for each argument
@@ -17,5 +19,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Moved structopt argument parser into main.rs and export new `Config` replacement
 
 <!-- next-url -->
-[Unreleased]: https://github.com/yaahc/uwubot/compare/v0.2.0...HEAD
+[Unreleased]: https://github.com/yaahc/uwubot/compare/v0.2.1...HEAD
+[0.2.1]: https://github.com/yaahc/uwubot/compare/v0.2.0...v0.2.1
 [0.2.0]: https://github.com/yaahc/uwubot/releases/tag/v0.2.0
