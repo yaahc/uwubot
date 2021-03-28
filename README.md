@@ -32,6 +32,11 @@ You can setup your own instance of uwubot using the following steps:
 
 Alternatively you can try to run `uwubot` with the provided `Dockerfile`. The `bot-token` and `client-id` args can be set via the `BOT_TOKEN` or `CLIENT_ID` environment variables.
 
+```
+docker build -t uwubot .
+docker run -it --rm --env BOT_TOKEN="<bot-token>" --env CLIENT_ID=<client-id> --name uwubot-running uwubot
+```
+
 ## Additional Details
 
 `uwubot` allows you to either register global commands or guild commands. To register a guild command you'll need to figure out your discord server's guild ID. I'll try to add an easy way to export this in `uwubot` in the future but for now you're on you're own, I'm sowwy >_<.
