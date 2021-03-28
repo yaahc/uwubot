@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 <!-- next-header -->
 
 ## [Unreleased] - ReleaseDate
+# Added
+- Added example for how to run with docker
 
 ## [0.2.1] - 2021-03-27
 # Added
@@ -15,7 +17,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.2.0] - 2021-03-16
 # Changed
-
 - Moved structopt argument parser into main.rs and export new `Config` replacement
 
 <!-- next-url -->
